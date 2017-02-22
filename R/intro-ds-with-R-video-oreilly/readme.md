@@ -56,6 +56,7 @@ df$instrument
 * more precisely we may use integers, blank spaces, names, booleans to slice vector or df;
 * we have shortcut to create ranges: `1:4 # 1 2 3 3`
 * we may access last elements with `tail(vec, n)` function; we may also view data in Excel like window with `View(df)`;
+
 #### logical tests
 * R uses `==` and `!=` as well as other usual operators, boolean operators: `&, |, xor, !, any, all`;
 * we have operator `%in%` to test membership:
@@ -68,6 +69,35 @@ df$instrument
 [1]  TRUE  TRUE FALSE FALSE
 ```
 
+## Plots
+* we use qplot to make a scatterplot: `qplot(displ, hwy, data = mpg)`;
+* we may add 3d variable on 2D plot using: (a) aesthetics; (b) facetting (small plots based on additional var):
+```R
+# also size, shape, alpha
+qplot(displ, hwy, data = mpg, color = class)
+
+qplot(displ, hwy, data = mpg) +
+facet_grid(. ~ cyl)
+```
+* we may change type of the plot with `geom` argument:
+```R
+qplot(displ,hwy,data = mpg,geom = "smooth")
+qplot(displ, hwy, data = mpg, geom = c("point", "smooth"))
+```
+* boxplot and reordering:
+```R
+qplot(reorder(class, hwy), hwy, data = mpg, geom = "boxplot")
+```
+* we may safe plot as pdf and png (usually, but other formats are available as well):
+```R
+# uses size on screen:
+ggsave("my-plot.pdf")
+ggsave("my-plot.png")
+ 
+# specify size in inches (not in pixels!):
+ggsave("my-plot.pdf", width = 6, height = 6)
+```
+## Data wrangling
 
 
 
